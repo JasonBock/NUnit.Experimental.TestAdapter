@@ -136,3 +136,57 @@ It's odd that the logs from the discoverer side don't show up, but it shows whic
 However, in either case, if I know the tests to run, I can create a generic `RunTests` that can be called from either method (probably).
 
 Side note: I think I just realized that VSTE will call the discoverer to get that list, and then pass that to the executor. Whereas `dotnet test` doesn't do a "discovery" phase, it just does execution.
+
+So I updated `RunTests()` that processes the `sources` similar to what the discoverer does, ran that via `dotnet test`, and...:
+```
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+C:\Users\jason\source\repos\NUnit.Experimental.TestAdapter\src\NUnit.Experimental.Hardcoded.TestAdapter\bin\Debug\net6.0\NUnit.Experimental.Hardcoded.TestAdapter.dll
+RunTests from sources started...
+source is C:\Users\jason\source\repos\NUnit.Experimental.TestAdapter\src\NUnit.Experimental.Hardcoded.TestAdapter\bin\Debug\net6.0\NUnit.Experimental.Hardcoded.TestAdapter.dll
+  Passed NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf50ms
+  Passed NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf100ms
+  Passed NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf200ms
+  Passed NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf500ms
+RunTests from sources finished.
+  Passed NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf1000ms
+
+Test Run Successful.
+Total tests: 5
+     Passed: 5
+ Total time: 2.4074 Seconds
+```
+Odd that the log messages get a little out of order at the end, but that's OK. Point is, it ran all of them!
+
+VSTE also works now. Can't do a screen shot here (easily), but it does show 5 tests running successfully. Progress!! It's odd that the tests show up **twice**, even though I only run 5, so...not sure what that's all about, but I'm more concerned about the `dotnet test` scenario anyway.
+
+So I tried to write the hard-coded discoverer and executor. Problem is, `source` for a `TestCase` cannot be null. So...I tried faking it. When I do that, VSTE says there's an "unexpected error" with messages like this:
+```
+System.Collections.Generic.KeyNotFoundException: The given key 'NUnit.Experimental.Hardcoded.TestAdapter.Tests.dll' was not present in the dictionary.
+   at System.Collections.Immutable.ImmutableDictionary`2.get_Item(TKey key)
+   at Microsoft.VisualStudio.TestWindow.Host.VsTestRunSession.ToTestResultRecord(TestResultRecord testResult, IImmutableDictionary`2 containerLookup, TestStore store, Int32 testRunIndex)
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at Microsoft.VisualStudio.TestWindow.Host.TestRunSession.AddTestResultRecords(IEnumerable`1 testResults)
+   at Microsoft.VisualStudio.TestWindow.Host.VsTestRunSession.OnTestRunStats(Object sender, RemoteTestRunChangedEvent testRunChangedArgs)
+   at Microsoft.VisualStudio.TestWindow.Logging.ILoggerExtensions.CallInternalWithLogging(IInternalLogger log, Action action, Boolean shouldThrow)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.VisualStudio.Telemetry.WindowsErrorReporting.WatsonReport.GetClrWatsonExceptionInfo(Exception exceptionObject)
+```
+However, VSTE eventually reports that all tests pass:
+```
+========== Test run finished: 4 Tests (4 Passed, 0 Failed, 0 Skipped) run in 5.1 sec ==========
+```
+This is with `source` "faked" to `NUnit.Experimental.Hardcoded.TestAdapter.Tests.dll`. If I put in a full file path, then everything works with no issues.
+
+Again, this seems like an issue with VSTE; `dotnet test` doesn't seem to care. There **might** be a way to figure out what directory the tests will run in, and "guess" what the assembly name would be somehow with the Compiler API name. The `source` **must** be a valid file path, so it can't be faked to something like "C:\temp\mystuff.dll".
+
+Or...I could do this:
+```
+var location = typeof(TimedTests).Assembly.Location;
+```
+Basically find out where a type's assembly is located. That gives:
+```
+C:\Users\jason\source\repos\NUnit.Experimental.TestAdapter\src\NUnit.Experimental.Hardcoded.TestAdapter\bin\Debug\net6.0\NUnit.Experimental.Hardcoded.TestAdapter.dll
+```
+Which is correct. This may not be correct 100% of the time, but for a MVP, this may be "good enough".

@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel.Logging;
 using NUnit.Experimental.Hardcoded.TestAdapter.Tests;
 
 namespace NUnit.Experimental.Hardcoded.TestAdapter;
@@ -11,10 +10,8 @@ public sealed class HardCodedTestExecutor
 {
 	public void Cancel() => throw new NotImplementedException();
 
-	private void RunTests(IRunContext runContext, IFrameworkHandle frameworkHandle)
+	private static void RunTests(IFrameworkHandle frameworkHandle)
 	{
-		frameworkHandle.SendMessage(TestMessageLevel.Informational, "RunTests started...");
-
 		var location = typeof(TimedTests).Assembly.Location;
 		var executorUri = new Uri(Shared.ExecutorUri);
 
@@ -26,13 +23,11 @@ public sealed class HardCodedTestExecutor
 		frameworkHandle.RecordResult(new TestResult(new TestCase("NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf1500ms", executorUri, location)) { Outcome = TestOutcome.Passed });
 		TimedTests.TestOf2000ms();
 		frameworkHandle.RecordResult(new TestResult(new TestCase("NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf2000ms", executorUri, location)) { Outcome = TestOutcome.Passed });
-
-		frameworkHandle.SendMessage(TestMessageLevel.Informational, "RunTests finished.");
 	}
 
 	public void RunTests(IEnumerable<TestCase> tests, IRunContext runContext, IFrameworkHandle frameworkHandle) =>
-		this.RunTests(runContext, frameworkHandle);
+		HardCodedTestExecutor.RunTests(frameworkHandle);
 
 	public void RunTests(IEnumerable<string> sources, IRunContext runContext, IFrameworkHandle frameworkHandle) =>
-		this.RunTests(runContext, frameworkHandle);
+		HardCodedTestExecutor.RunTests(frameworkHandle);
 }

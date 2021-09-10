@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Experimental.Hardcoded.TestAdapter", "NUnit.Experimental.Hardcoded.TestAdapter\NUnit.Experimental.Hardcoded.TestAdapter.csproj", "{8EED4C3B-C18A-4B27-8108-0543260C703D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnit.Experimental.Hardcoded.TestAdapter", "NUnit.Experimental.Hardcoded.TestAdapter\NUnit.Experimental.Hardcoded.TestAdapter.csproj", "{8EED4C3B-C18A-4B27-8108-0543260C703D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Experimental.Hardcoded.TestAdapter.Performance", "NUnit.Experimental.Hardcoded.TestAdapter.Performance\NUnit.Experimental.Hardcoded.TestAdapter.Performance.csproj", "{967FB726-DEE8-4114-8174-FEAF44E52528}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8EED4C3B-C18A-4B27-8108-0543260C703D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EED4C3B-C18A-4B27-8108-0543260C703D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EED4C3B-C18A-4B27-8108-0543260C703D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{967FB726-DEE8-4114-8174-FEAF44E52528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967FB726-DEE8-4114-8174-FEAF44E52528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967FB726-DEE8-4114-8174-FEAF44E52528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967FB726-DEE8-4114-8174-FEAF44E52528}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

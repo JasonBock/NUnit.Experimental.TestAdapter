@@ -12,8 +12,6 @@ public sealed class HardCodedTestDiscovery
 	public void DiscoverTests(IEnumerable<string> sources, IDiscoveryContext discoveryContext,
 		IMessageLogger logger, ITestCaseDiscoverySink discoverySink)
 	{
-		logger.SendMessage(TestMessageLevel.Informational, $"{nameof(HardCodedTestDiscovery)} - discovery started...");
-
 		// The idea is that all of the methods would be found and this would be "hard-coded"
 		// via a source generator
 		// I'm setting source to null as I really don't need it...at least I don't think I will.
@@ -24,7 +22,5 @@ public sealed class HardCodedTestDiscovery
 		discoverySink.SendTestCase(new TestCase("NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf1000ms", executorUri, location));
 		discoverySink.SendTestCase(new TestCase("NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf1500ms", executorUri, location));
 		discoverySink.SendTestCase(new TestCase("NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf2000ms", executorUri, location));
-
-		logger.SendMessage(TestMessageLevel.Informational, $"{nameof(HardCodedTestDiscovery)} - discovery finished.");
 	}
 }

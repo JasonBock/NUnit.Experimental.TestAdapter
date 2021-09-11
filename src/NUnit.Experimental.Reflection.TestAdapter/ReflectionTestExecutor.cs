@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 using NUnit.Framework;
 using System.Reflection;
 
-namespace NUnit.Experimental.Hardcoded.TestAdapter;
+namespace NUnit.Experimental.Reflection.TestAdapter;
 
 [ExtensionUri(Shared.ExecutorUri)]
 public sealed class ReflectionTestExecutor

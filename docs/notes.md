@@ -6,8 +6,10 @@ Random notes on getting this to work (I hope).
 
 * Step 1 - Run `dotnet test` against a project with tests. Shouldn't do anything.
 * Step 2 - See if the tests can be discovered, but not run. Hardcoded is fine.
-* Then see if the tests can be discovered and executed. Hardcoded is fine.
-* Then create two different test adapters. One that uses Reflection and one that is a source generator.
+* Step 3 - Then see if the tests can be discovered and executed. Hardcoded is fine.
+* Step 4 - Then create two different test adapters. One that uses Reflection and one that is hard-coded, and do perf tests.
+* Step 5 - Then create the source generator version
+* Step 6 - See how long it takes to actually do the source generation.
 
 ### Step 1
 
@@ -93,6 +95,8 @@ ReflectionTestDiscovery - discovery finished.
 That's progress.
 
 One "catch" I just realized is that the source is a full file path where the assembly eventually lands. If I source generate this, how would I know what the assembly file name is **and** where it's going to be located after it's built? This may be problematic. I'm not sure if/how the `source` in `TestCase` is used in the executor, and if things are hard-coded anyway, maybe it's not necessary. I'll see.
+
+## Steps 3 and 4
 
 I think it's time to start working on the executor and see how that works. Seems like it's a class that inherits from `ITestExecutor`. Maybe `IExecutionContext` as well? This has three methods: `Cancel()` and two overloads of `RunTests()`. For now, I'll ignore `Cancel()` and assume I never cancel anything. I put a log method from `frameworkHandle` into each `RunTests()` and I ran from both VSTE and `dotnet test`.
 
@@ -189,4 +193,16 @@ Basically find out where a type's assembly is located. That gives:
 ```
 C:\Users\jason\source\repos\NUnit.Experimental.TestAdapter\src\NUnit.Experimental.Hardcoded.TestAdapter\bin\Debug\net6.0\NUnit.Experimental.Hardcoded.TestAdapter.dll
 ```
-Which is correct. This may not be correct 100% of the time, but for a MVP, this may be "good enough".
+Which is correct. This may not be correct 100% of the time, but for a MVP, this may be "good enough". There's also `SolutionDirectory` and `TestRunDirectory` from `IRunContext`. Neither one seems like what we want though.
+
+## Step 5
+
+The idea is to have a shared project that contains our tests, and then reference that from two other projects. Each of those will reference test adapter projects.
+
+NUnit.Experimental.Tests
+	NUnit.Experimental.Tests.Reflection
+		(references) NUnit.Experimental.Reflection.TestAdapter
+	NUnit.Experimental.Tests.SourceGenerator
+		(references) NUnit.Experimental.SourceGenerator.TestAdapter
+
+## Step 6

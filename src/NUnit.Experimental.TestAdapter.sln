@@ -7,7 +7,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnit.Experimental.Hardcode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Experimental.Hardcoded.TestAdapter.Performance", "NUnit.Experimental.Hardcoded.TestAdapter.Performance\NUnit.Experimental.Hardcoded.TestAdapter.Performance.csproj", "{967FB726-DEE8-4114-8174-FEAF44E52528}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NUnit.Experimental.Tests", "NUnit.Experimental.Tests\NUnit.Experimental.Tests.shproj", "{03688360-649F-4330-B768-A235DE4BD707}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Experimental.Tests.Reflection", "NUnit.Experimental.Tests.Reflection\NUnit.Experimental.Tests.Reflection.csproj", "{8C840D39-4CCB-4C67-9942-E82D0579DADC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Experimental.Tests.SourceGenerator", "NUnit.Experimental.Tests.SourceGenerator\NUnit.Experimental.Tests.SourceGenerator.csproj", "{5BB7E19F-8896-4C89-9990-E31F7EEC6AB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Experimental.Reflection.TestAdapter", "NUnit.Experimental.Reflection.TestAdapter\NUnit.Experimental.Reflection.TestAdapter.csproj", "{BE8485A6-4FA0-4D8C-B649-DD1A1DCC3DDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{53722F21-E068-4086-A7DD-778B3A1762D6}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Experimental.SourceGenerator.TestAdapter", "NUnit.Experimental.SourceGenerator.TestAdapter\NUnit.Experimental.SourceGenerator.TestAdapter.csproj", "{4C1C7242-D7B2-428F-B882-E2235F2DB050}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		NUnit.Experimental.Tests\NUnit.Experimental.Tests.projitems*{03688360-649f-4330-b768-a235de4bd707}*SharedItemsImports = 13
+		NUnit.Experimental.Tests\NUnit.Experimental.Tests.projitems*{5bb7e19f-8896-4c89-9990-e31f7eec6ab9}*SharedItemsImports = 5
+		NUnit.Experimental.Tests\NUnit.Experimental.Tests.projitems*{8c840d39-4ccb-4c67-9942-e82d0579dadc}*SharedItemsImports = 5
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -21,6 +41,22 @@ Global
 		{967FB726-DEE8-4114-8174-FEAF44E52528}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{967FB726-DEE8-4114-8174-FEAF44E52528}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{967FB726-DEE8-4114-8174-FEAF44E52528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C840D39-4CCB-4C67-9942-E82D0579DADC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C840D39-4CCB-4C67-9942-E82D0579DADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C840D39-4CCB-4C67-9942-E82D0579DADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C840D39-4CCB-4C67-9942-E82D0579DADC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BB7E19F-8896-4C89-9990-E31F7EEC6AB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB7E19F-8896-4C89-9990-E31F7EEC6AB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB7E19F-8896-4C89-9990-E31F7EEC6AB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB7E19F-8896-4C89-9990-E31F7EEC6AB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE8485A6-4FA0-4D8C-B649-DD1A1DCC3DDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE8485A6-4FA0-4D8C-B649-DD1A1DCC3DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE8485A6-4FA0-4D8C-B649-DD1A1DCC3DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE8485A6-4FA0-4D8C-B649-DD1A1DCC3DDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C1C7242-D7B2-428F-B882-E2235F2DB050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C1C7242-D7B2-428F-B882-E2235F2DB050}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C1C7242-D7B2-428F-B882-E2235F2DB050}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C1C7242-D7B2-428F-B882-E2235F2DB050}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

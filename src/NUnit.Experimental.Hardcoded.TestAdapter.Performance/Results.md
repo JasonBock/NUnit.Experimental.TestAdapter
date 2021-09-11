@@ -11,3 +11,10 @@
 |-------------------- |--------:|---------:|---------:|------:|----------:|
 |  HardCodedExecution | 5.028 s | 0.0093 s | 0.0087 s |  1.00 |      4 KB |
 | ReflectionExecution | 5.032 s | 0.0088 s | 0.0082 s |  1.00 |     47 KB |
+
+## `ExecutorTests` - 1 10ms test
+
+|              Method |     Mean |    Error |   StdDev | Ratio | Allocated |
+|-------------------- |---------:|---------:|---------:|------:|----------:|
+|  HardCodedExecution | 15.48 ms | 0.069 ms | 0.064 ms |  1.00 |      1 KB |
+| ReflectionExecution | 15.45 ms | 0.047 ms | 0.044 ms |  1.00 |      7 KB |

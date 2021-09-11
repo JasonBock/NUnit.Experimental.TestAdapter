@@ -15,6 +15,8 @@ public sealed class HardCodedTestExecutor
 		var location = typeof(TimedTests).Assembly.Location;
 		var executorUri = new Uri(Shared.ExecutorUri);
 
+		TimedTests.TestOf10ms();
+		frameworkHandle.RecordResult(new TestResult(new TestCase("NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf10ms", executorUri, location)) { Outcome = TestOutcome.Passed });
 		TimedTests.TestOf500ms();
 		frameworkHandle.RecordResult(new TestResult(new TestCase("NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf500ms", executorUri, location)) { Outcome = TestOutcome.Passed });
 		TimedTests.TestOf1000ms();

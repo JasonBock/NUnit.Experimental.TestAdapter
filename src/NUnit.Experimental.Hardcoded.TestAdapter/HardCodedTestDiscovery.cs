@@ -16,8 +16,9 @@ public sealed class HardCodedTestDiscovery
 		// via a source generator
 		// I'm setting source to null as I really don't need it...at least I don't think I will.
 
-		var location = typeof(TimedTests).Assembly.Location;
 		var executorUri = new Uri(Shared.ExecutorUri);
+
+		var location = typeof(TimedTests).Assembly.Location;
 		discoverySink.SendTestCase(new TestCase("NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf500ms", executorUri, location));
 		discoverySink.SendTestCase(new TestCase("NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf1000ms", executorUri, location));
 		discoverySink.SendTestCase(new TestCase("NUnit.Experimental.Hardcoded.TestAdapter.Tests.TimedTests::TestOf1500ms", executorUri, location));

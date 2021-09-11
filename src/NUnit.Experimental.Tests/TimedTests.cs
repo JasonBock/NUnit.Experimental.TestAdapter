@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace NUnit.Experimental.Hardcoded.TestAdapter.Tests;
+namespace NUnit.Experimental.Tests;
 
 public static class TimedTests
 {

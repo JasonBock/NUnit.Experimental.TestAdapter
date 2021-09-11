@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Experimental.SourceGenerator.TestAdapter", "NUnit.Experimental.SourceGenerator.TestAdapter\NUnit.Experimental.SourceGenerator.TestAdapter.csproj", "{4C1C7242-D7B2-428F-B882-E2235F2DB050}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Experimental.SourceGenerator.TestAdapter.Tests", "NUnit.Experimental.SourceGenerator.TestAdapter.Tests\NUnit.Experimental.SourceGenerator.TestAdapter.Tests.csproj", "{88546E31-8A8D-4A78-AF9A-4BE9F9C52182}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		NUnit.Experimental.Tests\NUnit.Experimental.Tests.projitems*{03688360-649f-4330-b768-a235de4bd707}*SharedItemsImports = 13
@@ -57,6 +59,10 @@ Global
 		{4C1C7242-D7B2-428F-B882-E2235F2DB050}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C1C7242-D7B2-428F-B882-E2235F2DB050}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C1C7242-D7B2-428F-B882-E2235F2DB050}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88546E31-8A8D-4A78-AF9A-4BE9F9C52182}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88546E31-8A8D-4A78-AF9A-4BE9F9C52182}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88546E31-8A8D-4A78-AF9A-4BE9F9C52182}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88546E31-8A8D-4A78-AF9A-4BE9F9C52182}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

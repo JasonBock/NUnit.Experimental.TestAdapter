@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace NUnit.Experimental.SourceGenerator.TestAdapter;
 
-public sealed class SourceGeneratorTestDiscovererReceiver
+public sealed class SourceGeneratorTestReceiver
 	: ISyntaxContextReceiver
 {
 	public void OnVisitSyntaxNode(GeneratorSyntaxContext context)

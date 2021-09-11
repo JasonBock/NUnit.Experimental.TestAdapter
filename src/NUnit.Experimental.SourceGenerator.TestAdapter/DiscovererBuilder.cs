@@ -10,7 +10,7 @@ namespace NUnit.Experimental.SourceGenerator.TestAdapter;
 
 internal sealed class DiscovererBuilder
 {
-	internal DiscovererBuilder(List<IMethodSymbol> targets)
+	internal DiscovererBuilder(List<IGrouping<ISymbol?, IMethodSymbol>> targets)
 	{
 		var namespaces = new NamespaceGatherer();
 		namespaces.Add(typeof(DefaultExecutorUriAttribute));
@@ -19,10 +19,9 @@ internal sealed class DiscovererBuilder
 		namespaces.Add(typeof(IDiscoveryContext));
 		namespaces.Add(typeof(IMessageLogger));
 		namespaces.Add(typeof(ITestCaseDiscoverySink));
+		namespaces.Add(typeof(Uri));
 
-		var targetsByType = targets.GroupBy(_ => _.ContainingType, SymbolEqualityComparer.Default).ToList();
-
-		foreach(var targetType in targetsByType)
+		foreach(var targetType in targets)
 		{
 			namespaces.Add(targetType.Key!.ContainingNamespace);
 		}
@@ -39,10 +38,12 @@ internal sealed class DiscovererBuilder
 		indentWriter.WriteLine("#nullable enable");
 
 		indentWriter.WriteLine();
-		indentWriter.WriteLine($"namespace {this.GetType().Namespace};");
+		indentWriter.WriteLine($"namespace {this.GetType().Namespace}");
 
-		indentWriter.WriteLine();
-		indentWriter.WriteLine($"[DefaultExecutorUri({Shared.ExecutorUri})]");
+		indentWriter.WriteLine("{");
+		indentWriter.Indent++;
+
+		indentWriter.WriteLine($"[DefaultExecutorUri(\"{Shared.ExecutorUri}\")]");
 		indentWriter.WriteLine($"public sealed class {Shared.DiscovererName}");
 		indentWriter.Indent++;
 		indentWriter.WriteLine($": ITestDiscoverer");
@@ -59,10 +60,10 @@ internal sealed class DiscovererBuilder
 		indentWriter.WriteLine("{");
 		indentWriter.Indent++;
 
-		indentWriter.WriteLine($"var executorUri = new Uri({Shared.ExecutorUri});");
-		indentWriter.WriteLine($"var location = typeof({targetsByType[0].Key!.Name}).Assembly.Location");
+		indentWriter.WriteLine($"var executorUri = new Uri(\"{Shared.ExecutorUri}\");");
+		indentWriter.WriteLine($"var location = typeof({targets[0].Key!.Name}).Assembly.Location;");
 
-		foreach (var targetType in targetsByType)
+		foreach (var targetType in targets)
 		{
 			var typeName = $"{targetType.Key!.ContainingNamespace.GetName()}.{targetType.Key!.Name}";
 
@@ -71,6 +72,9 @@ internal sealed class DiscovererBuilder
 				indentWriter.WriteLine($"discoverySink.SendTestCase(new TestCase(\"{typeName}::{targetMethod.Name}\", executorUri, location));");
 			}
 		}
+
+		indentWriter.Indent--;
+		indentWriter.WriteLine("}");
 
 		indentWriter.Indent--;
 		indentWriter.WriteLine("}");

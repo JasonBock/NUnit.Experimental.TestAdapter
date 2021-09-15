@@ -8,12 +8,14 @@ Random notes on getting this to work (I hope).
 * Step 2 - See if the tests can be discovered, but not run. Hardcoded is fine.
 * Step 3 - Then see if the tests can be discovered and executed. Hardcoded is fine.
 * Step 4 - Then create two different test adapters. One that uses Reflection and one that is hard-coded, and do perf tests.
-* Step 5 - Then create the source generator version
-* Step 6 - See how long it takes to actually do the source generation.
+* Step 5 - Then create the source generator version.
+* Step 6 - Then write a test to ensure it's actually "correct".
+* Step 7 - See how long it takes to actually do the source generation.
+* Step 8 - Reference the source generator test adapter in a project and see if it'll run tests, both with `dotnet test` and VS Test Explorer (or VSTE).
 
 ### Step 1
 
-I created a project that references NUnit but it doesn't reference the adapter. I added 5 tests, and I told VS Test Explorer (or VSTE) to "run tests". Here's the output:
+I created a project that references NUnit but it doesn't reference the adapter. I added 5 tests, and I told or VSTE to "run tests". Here's the output:
 ```
 Building Test Projects
 Starting test discovery for requested test run
@@ -40,7 +42,7 @@ All projects are up-to-date for restore.
 ```
 It doesn't give any error messages, it just doesn't do anything.
 
-## Step 2
+### Step 2
 
 OK, how do I get tests to be discovered? Let's start by look at [NUnit's adapter](https://github.com/nunit/nunit3-vs-adapter). It looks like we want to reference `Microsoft.TestPlatform.ObjectModel`. OK, referencing it.
 
@@ -96,7 +98,7 @@ That's progress.
 
 One "catch" I just realized is that the source is a full file path where the assembly eventually lands. If I source generate this, how would I know what the assembly file name is **and** where it's going to be located after it's built? This may be problematic. I'm not sure if/how the `source` in `TestCase` is used in the executor, and if things are hard-coded anyway, maybe it's not necessary. I'll see.
 
-## Steps 3 and 4
+### Steps 3 and 4
 
 I think it's time to start working on the executor and see how that works. Seems like it's a class that inherits from `ITestExecutor`. Maybe `IExecutionContext` as well? This has three methods: `Cancel()` and two overloads of `RunTests()`. For now, I'll ignore `Cancel()` and assume I never cancel anything. I put a log method from `frameworkHandle` into each `RunTests()` and I ran from both VSTE and `dotnet test`.
 
@@ -195,7 +197,7 @@ C:\Users\jason\source\repos\NUnit.Experimental.TestAdapter\src\NUnit.Experimenta
 ```
 Which is correct. This may not be correct 100% of the time, but for a MVP, this may be "good enough". There's also `SolutionDirectory` and `TestRunDirectory` from `IRunContext`. Neither one seems like what we want though.
 
-## Step 5
+### Step 5
 
 The idea is to have a shared project that contains our tests, and then reference that from two other projects. Each of those will reference test adapter projects.
 
@@ -204,5 +206,15 @@ NUnit.Experimental.Tests
 		(references) NUnit.Experimental.Reflection.TestAdapter
 	NUnit.Experimental.Tests.SourceGenerator
 		(references) NUnit.Experimental.SourceGenerator.TestAdapter
+		
+So...I wrote a bunch of code, now I need to create some tests for the generator that's doing discovery. This was all recorded in a video.
 
-## Step 6
+### Step 6
+
+After a lot of fighting getting assembly references and code syntax correct, I now have a passing test that creates a discoverer and a generator! This was all recorded in a video.
+
+### Step 7
+
+I made a video on this. It's a little hard to tell just how much is gained with this approach, but it's not discouraging either.
+
+### Step 8

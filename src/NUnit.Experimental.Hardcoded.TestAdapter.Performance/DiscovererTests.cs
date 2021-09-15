@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Logging;
 using NUnit.Experimental.Hardcoded.TestAdapter.Tests;
 using Rocks;
+using System.Collections.Generic;
 
 namespace NUnit.Experimental.Hardcoded.TestAdapter.Performance
 {

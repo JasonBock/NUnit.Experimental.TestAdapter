@@ -1,4 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace NUnit.Experimental.SourceGenerator.TestAdapter;
@@ -7,6 +9,9 @@ internal sealed class NamespaceGatherer
 {
 	private readonly ImmutableHashSet<string>.Builder builder =
 		ImmutableHashSet.CreateBuilder<string>();
+
+	public void Add(string @namespace) =>
+		this.builder.Add(@namespace);
 
 	public void Add(INamespaceSymbol @namespace)
 	{

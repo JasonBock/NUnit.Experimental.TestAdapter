@@ -1,9 +1,10 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel.Logging;
+using System;
 using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace NUnit.Experimental.SourceGenerator.TestAdapter;
@@ -13,12 +14,10 @@ internal sealed class DiscovererBuilder
 	internal DiscovererBuilder(List<IGrouping<ISymbol?, IMethodSymbol>> targets)
 	{
 		var namespaces = new NamespaceGatherer();
-		namespaces.Add(typeof(DefaultExecutorUriAttribute));
-		namespaces.Add(typeof(ITestDiscoverer));
+		namespaces.Add("Microsoft.VisualStudio.TestPlatform.ObjectModel");
+		namespaces.Add("Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter");
+		namespaces.Add("Microsoft.VisualStudio.TestPlatform.ObjectModel.Logging");
 		namespaces.Add(typeof(IEnumerable<>));
-		namespaces.Add(typeof(IDiscoveryContext));
-		namespaces.Add(typeof(IMessageLogger));
-		namespaces.Add(typeof(ITestCaseDiscoverySink));
 		namespaces.Add(typeof(Uri));
 
 		foreach(var targetType in targets)

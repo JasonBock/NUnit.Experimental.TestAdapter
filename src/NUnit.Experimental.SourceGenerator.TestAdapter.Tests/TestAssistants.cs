@@ -3,6 +3,9 @@ using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NUnit.Experimental.SourceGenerator.TestAdapter.Tests;
 
@@ -18,9 +21,9 @@ internal static class TestAssistants
 		{
 			ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
 			TestState =
-				{
-					Sources = { code },
-				},
+			{
+				Sources = { code },
+			},
 		};
 
 		foreach (var generatedSource in generatedSources)

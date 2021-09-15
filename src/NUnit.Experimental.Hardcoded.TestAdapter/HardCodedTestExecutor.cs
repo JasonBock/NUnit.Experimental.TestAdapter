@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 using NUnit.Experimental.Hardcoded.TestAdapter.Tests;
+using System;
+using System.Collections.Generic;
 
 namespace NUnit.Experimental.Hardcoded.TestAdapter;
 

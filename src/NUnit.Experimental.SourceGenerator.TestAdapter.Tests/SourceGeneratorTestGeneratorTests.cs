@@ -1,5 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.Testing;
 using NUnit.Framework;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace NUnit.Experimental.SourceGenerator.TestAdapter.Tests;
 

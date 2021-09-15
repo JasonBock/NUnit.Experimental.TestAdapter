@@ -1,8 +1,10 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
+using System;
 using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace NUnit.Experimental.SourceGenerator.TestAdapter;
@@ -12,12 +14,9 @@ internal sealed class ExecutorBuilder
 	internal ExecutorBuilder(List<IGrouping<ISymbol?, IMethodSymbol>> targets)
 	{
 		var namespaces = new NamespaceGatherer();
-		namespaces.Add(typeof(ExtensionUriAttribute));
-		namespaces.Add(typeof(ITestExecutor));
-		namespaces.Add(typeof(IFrameworkHandle));
+		namespaces.Add("Microsoft.VisualStudio.TestPlatform.ObjectModel");
+		namespaces.Add("Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter");
 		namespaces.Add(typeof(IEnumerable<>));
-		namespaces.Add(typeof(TestCase));
-		namespaces.Add(typeof(IRunContext));
 		namespaces.Add(typeof(Uri));
 		namespaces.Add(typeof(NotImplementedException));
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace NUnit.Experimental.SourceGenerator.TestAdapter;
 
@@ -14,16 +14,17 @@ public sealed class SourceGeneratorTestReceiver
 
 		if (syntaxNode is MethodDeclarationSyntax)
 		{
-			var testAttributeSymbol = model.Compilation.GetTypeByMetadataName(typeof(TestAttribute).FullName!);
 			var methodSymbol = model.GetDeclaredSymbol(syntaxNode) as IMethodSymbol;
 
 			if(methodSymbol is not null)
 			{
 				foreach (var methodAttribute in methodSymbol.GetAttributes())
 				{
-					if (SymbolEqualityComparer.Default.Equals(methodAttribute.AttributeClass!, testAttributeSymbol) &&
-						methodSymbol.IsStatic && methodSymbol.DeclaredAccessibility == Accessibility.Public &&
-						methodSymbol.Parameters.Length == 0 && !methodSymbol.IsAsync)
+					var methodAttributeType = methodAttribute.AttributeClass!;
+
+					if(methodAttributeType.Name == "TestAttribute" &&
+						methodAttributeType.ContainingNamespace.GetName() == "NUnit.Framework" &&
+						methodAttributeType.ContainingAssembly.Name == "nunit.framework")
 					{
 						this.Targets.Add(methodSymbol);
 					}

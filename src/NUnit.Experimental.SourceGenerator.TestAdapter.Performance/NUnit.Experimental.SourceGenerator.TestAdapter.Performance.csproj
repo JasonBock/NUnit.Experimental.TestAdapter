@@ -8,9 +8,11 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
-    <PackageReference Include="Rocks" Version="6.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.11.0" />
+    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="16.11.0" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NUnit.Experimental.Hardcoded.TestAdapter\NUnit.Experimental.Hardcoded.TestAdapter.csproj" />
+    <ProjectReference Include="..\NUnit.Experimental.SourceGenerator.TestAdapter\NUnit.Experimental.SourceGenerator.TestAdapter.csproj" />
   </ItemGroup>
 </Project>

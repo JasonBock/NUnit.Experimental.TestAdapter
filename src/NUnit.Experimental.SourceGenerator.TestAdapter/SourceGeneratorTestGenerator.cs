@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using System.Linq;
 
 namespace NUnit.Experimental.SourceGenerator.TestAdapter;
 

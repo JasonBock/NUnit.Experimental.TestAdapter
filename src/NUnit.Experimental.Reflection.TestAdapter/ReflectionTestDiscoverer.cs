@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Logging;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace NUnit.Experimental.Reflection.TestAdapter;

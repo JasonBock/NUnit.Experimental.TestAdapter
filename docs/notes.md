@@ -218,3 +218,15 @@ After a lot of fighting getting assembly references and code syntax correct, I n
 I made a video on this. It's a little hard to tell just how much is gained with this approach, but it's not discouraging either.
 
 ### Step 8
+
+Seems like the "right" thing to do is to **not** reference either NUnit or Microsoft.TestPlatform.ObjectModel directly - meaning, there shouldn't be a dependency for these within the project itself. Only have Microsoft.TestPlatform.ObjectModel as a normal reference, which means it will be part of the dependency tree for the referencing project. They'll still have to reference NUnit, but that's "normal" as they'll be writing tests already.
+
+This means that:
+* I'll need ensure `NamespaceGatherer` has a way to put in a namespace via a string, as I'll need to ensure I have the "right" ones from NUnit and the object model types.
+* I'll no longer be able to compare to the `TestAttribute` symbol. I'll have to look at its name and containing assembly and ensure that it's either `Test` or `TestAttribute` and it's from `NUnit`. 
+
+Type name: "TestAttribute"
+Namespace: "NUnit.Framework"
+Containing Assembly Name: "nunit.framework"
+
+OK, I finally realized the assembly name **has** to end with `.TestAdapter`, or at least `TestAdapter`. I know I saw a reference to this at some point, I need to find that link again. But...it finally works!

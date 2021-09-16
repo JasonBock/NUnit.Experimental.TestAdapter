@@ -13,6 +13,7 @@
     <PackageReference Include="NUnit" Version="3.13.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NUnit.Experimental.Reflection.TestAdapter\NUnit.Experimental.Reflection.TestAdapter.csproj" />
     <ProjectReference Include="..\NUnit.Experimental.SourceGenerator.TestAdapter\NUnit.Experimental.SourceGenerator.TestAdapter.csproj" />
   </ItemGroup>
 </Project>

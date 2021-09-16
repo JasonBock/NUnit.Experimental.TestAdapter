@@ -1,6 +1,6 @@
 # NUnit.Experimental.TestAdapter
 
-An experimental idea to use a [source generator](https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview) to handle test discover and execution in [NUnit](https://nunit.org/).
+An experimental idea to use a [source generator](https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview) to handle test discovery and execution in [NUnit](https://nunit.org/).
 
 ## Overview
 

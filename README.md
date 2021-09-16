@@ -35,13 +35,13 @@ There are a number of projects within this solution - here's a description of th
 
 You can execute the tests using either Visual Studio Test Explorer (VSTE) or `dotnet test`. Either approach should work. Here's what I see when I use VSTE:
 
-{TODO: Screen shot}
+![image](https://user-images.githubusercontent.com/904213/133625505-93a59484-fca1-4353-85ef-c7a8b3436be3.png)
 
 Note that the test list seems to be duplicated. I'm not sure why this is happening, but I only get 5 tests running which is what I expect.
 
 Here's what I get when I run `dotnet test`:
 
-{TODO: Screen shot}
+![image](https://user-images.githubusercontent.com/904213/133625647-650c6f8d-fcbf-481c-aa2b-18abd7f58a16.png)
 
 In this case, the test list isn't duplicated. I should note that when you use `dotnet test`, it appears that the discoverer is never run. Also, when you use `dotnet test`, the `RunTests()` overload that takes a `IEnumerable<string>` parameter is called. In the case of VSTE, `RunTests()` that takes a `IEnumerable<TestCase>` parameter is called. This is why I generate a private `RunTests()` method that is called from both public `RunTests()` overloads.
 

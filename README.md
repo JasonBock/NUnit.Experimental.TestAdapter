@@ -52,3 +52,5 @@ For this MVP/proof-of-concept, I'm considering this "complete". To make this a f
 ## Conclusion
 
 This has been a fun ride to use source generators in another area of software development: finding and running tests in .NET. If you have any questions or comments, please file an issue, though, again, keep in mind that the intent is **not** to create another test adapter for NUnit. I really don't have the time or the desire to do that :).
+
+(FWIW I also [did a video](https://www.youtube.com/watch?v=EosWs2GcWFQ) that briefly demonstrates how this works.
